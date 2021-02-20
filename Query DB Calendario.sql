@@ -3,13 +3,13 @@ use CalendarioPartidos;
 
 
 create table Categorias(
-	categorioId int not null,
+	categorioId int not null auto_increment,
     categoriaDesc varchar(25) unique not null, 
     PRIMARY KEY (categorioId)
 );
 
 create table Equipos(
-	equipoId int not null,
+	equipoId int not null auto_increment,
     equipoDesc varchar(25) unique not null,
     equipoCategoria int not null,
     PRIMARY KEY (equipoId),
@@ -32,22 +32,30 @@ create table TablaPosiciones(
 );
 
 create table EstadoPartido(
-	estadoPedidoId int not null,
+	estadoPedidoId int not null auto_increment,
     estadoPartidoDesc varchar(25) not null,
     PRIMARY KEY (estadoPedidoId)
 );
 
 create table Resultados(
-	resultadosId int not null,
+	resultadosId int not null auto_increment,
     resultadosNombreVisitante int not null,
     resultadosVisitante int not null,
     resultadoPuntosVisitante int not null,
     resultadoNombreLocal int not null,
     resultadoPuntosLocal int not null,
     resultadoLocal int not null,
-    resultadoEstadoPartido int not null,
 	PRIMARY KEY (resultadosId),
     CONSTRAINT FK_ResultadoEquipoLocal FOREIGN KEY (resultadoNombreLocal) REFERENCES Equipos(equipoId),
-	CONSTRAINT FK_ResultadoEquipoVisitante FOREIGN KEY (resultadosNombreVisitante) REFERENCES Equipos(equipoId),
-	CONSTRAINT FK_ResultadoEstado FOREIGN KEY (resultadoEstadoPartido) REFERENCES estadoPartido(estadoPedidoId)
+	CONSTRAINT FK_ResultadoEquipoVisitante FOREIGN KEY (resultadosNombreVisitante) REFERENCES Equipos(equipoId)
+    );
+    
+create table Calendario(
+	calendarioId int not null auto_increment,
+	categoriaEquipoLocal int not null,
+    categoriaEquipoVisita int not null,
+    categoriaFecha date not null,
+    categoriaHora time not null,
+    PRIMARY KEY (calendarioId),
+    CONSTRAINT FK_CalendarioLocal FOREIGN KEY () REFERENCES
 );
